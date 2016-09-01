@@ -11,23 +11,20 @@ class Bundle extends Product
 		parent::__construct($name, $price = null, $quantity);
 	}
 	
-	protected function createBundlePrice($productQuantity)
+	public function getPrice()
 	{
 		$tottalPrice = 0;
-		foreach ($this->containingProducts as $porduct) {
-			if (isset($porduct)){
-				$tottalPrice += $porduct->getPrice() * $productQuantity * 0.9; // 10% discount
-				$porduct->setQuantity($productQuantity);
-			}
+		foreach ($this->containingProducts as $porduct) {			
+			$tottalPrice += $porduct->getPrice() * $productQuantity * 0.9; // 10% discount
 		}
-		$this->price = round($tottalPrice, 2);
 		return $tottalPrice;
 	}
 	
-	public function addProductToBundle(Product $product, $productQuantity)
+	public function addProduct(Product $product, $productQuantity)
 	{	
-		$this->containingProducts[] = clone $product;
+		$product = clone $product;
+		$product->setQuantity($productQuantity);
 		
-		$this->createBundlePrice($productQuantity);
+		$this->containingProducts[] = $product;
 	}
 }
