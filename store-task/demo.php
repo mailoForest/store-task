@@ -16,7 +16,7 @@ $vaflaMura->load(5);
 
 
 $popara = new Bundle('popara', 1);
-$popara->addProductToBundle($bread, 1);
-$popara->addProductToBundle($milk, 0.5);
+$popara->addProduct($bread, 1);
+$popara->addProduct($milk, 0.5);
 
 var_dump($popara);
