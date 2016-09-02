@@ -14,8 +14,8 @@ class Bundle extends Product
 	public function getPrice()
 	{
 		$tottalPrice = 0;
-		foreach ($this->containingProducts as $porduct) {			
-			$tottalPrice += $porduct->getPrice() * $productQuantity * 0.9; // 10% discount
+		foreach ($this->containingProducts as $product) {			
+			$tottalPrice += $product->getPrice() * $product->getQuantity(); // 10% discount
 		}
 		return $tottalPrice;
 	}
@@ -26,5 +26,7 @@ class Bundle extends Product
 		$product->setQuantity($productQuantity);
 		
 		$this->containingProducts[] = $product;
+		
+		$this->setPrice($this->getPrice());
 	}
 }
